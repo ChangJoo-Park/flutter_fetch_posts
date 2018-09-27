@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
@@ -20,6 +23,19 @@ class Post {
       title: json['title'],
       body: json['body'],
     );
+  }
+}
+
+// Service: fetchPost
+Future<Post> fetchPost() async {
+  final url = 'https://jsonplaceholder.typicode.com/posts/1';
+  final response = await http.get(url);
+
+  if (response.statusCode == 200) {
+    final jsonBody = json.decode(response.body);
+    return Post.fromJson(jsonBody);
+  } else {
+    throw Exception('Failed to load post');
   }
 }
 
