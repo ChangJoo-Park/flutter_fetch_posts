@@ -52,12 +52,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class PostDetailPage extends StatefulWidget {
-  @override
-  _PostDetailPageState createState() => new _PostDetailPageState();
-}
-
-class _PostDetailPageState extends State<PostDetailPage> {
+class PostDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
