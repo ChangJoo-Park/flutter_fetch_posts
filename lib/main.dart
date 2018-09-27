@@ -64,7 +64,37 @@ class _PostDetailPageState extends State<PostDetailPage> {
       appBar: new AppBar(
         title: new Text('Post Detail'),
       ),
-      body: new Column(),
+      body: new Column(
+        children: <Widget>[
+          FutureBuilder(
+            future: fetchPost(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                final title = snapshot.data.title;
+                final body = snapshot.data.body;
+                return Column(
+                  children: <Widget>[
+                    // Post Title
+                    Text(
+                      title,
+                      style: Theme.of(context).textTheme.title,
+                    ),
+                    // Post Body
+                    Text(
+                      body,
+                      style: Theme.of(context).textTheme.display1,
+                    )
+                  ],
+                );
+              } else if (snapshot.hasError) {
+                return Text("${snapshot.error}");
+              }
+
+              return CircularProgressIndicator();
+            },
+          ),
+        ],
+      ),
     );
   }
 }
